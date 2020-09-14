@@ -1,5 +1,5 @@
 const { error } = require("console");
-const { response } = require("express");
+const { response, text } = require("express");
 const fs = require('fs');
 var path = require("path");
 const generateID = require("../scripts/idgenerator");
@@ -10,6 +10,7 @@ const writeMyFile = require("../scripts/writefile");
 // ===============================================================================
 
 var dbNotes = require("../db/db.json");
+const { title } = require("process");
 
 // ===============================================================================
 // ROUTING
@@ -41,9 +42,11 @@ module.exports = function(app) {
   // API DELETE Requests
   // -----------------------------------------------------------------------------
   app.delete("/api/notes/:id", function(req, res) {
-      var note = req.params.id;
-      console.log("Delete Request for Note: " + note);
-      dbNotes.splice(note, 1);
+      var note = parseInt(req.params.id);
+      console.log("This is note: " + note);
+
+      dbNotes.splice((note - 1), 1);
+      writeMyFile('./db/db.json', dbNotes);
       res.json(true);
   });
   
