@@ -2,6 +2,7 @@ const { error } = require("console");
 const { response } = require("express");
 const fs = require('fs');
 var path = require("path");
+const generateID = require("../scripts/idgenerator");
 
 // ===============================================================================
 // LOAD DATA
@@ -21,27 +22,34 @@ module.exports = function(app) {
     res.json(dbNotes);
   });
 
+
   // API POST Requests
   // ---------------------------------------------------------------------------
   app.post("/api/notes", function(req, res) {
-    // var notes = JSON.parse(req.body);
+    var newNote = req.body;
+
     console.log("Notes Write Request (POST)");
-    console.log("Request: " + JSON.stringify(req.body));
+    console.log("Request to write: " + JSON.stringify(newNote));
 
-    for (let i = 0; i < dbNotes.length; i++) {
-        req.body.id = i + 1;
-    }
+    console.log(newNote);
 
-    dbNotes.push(req.body);
+    dbNotes.push(newNote);
+
+    // newNote.id = generateID(dbNotes); // Generate the ID
+    generateID(dbNotes); // Generate the ID
+
     fs.writeFile(path.join('./db/db.json'), JSON.stringify(dbNotes), (error) => {
         if (error) {
             throw error;
         }
         console.log("Data written to db.json file!");
     });
-    console.log("Request: " + JSON.stringify(req.body));
-    // res.json(true);
+
+    console.log("Request: " + JSON.stringify(newNote));
+
+    res.json(true);
   });
+
   
   // API DELETE Requests
   // ---------------------------------------------------------------------------
@@ -49,10 +57,11 @@ module.exports = function(app) {
       var note = req.params.id;
       console.log("Notes: " + note);
       console.log("Notes Delete Request (POST)");
-      dbNotes.splice(note, req.body);
+      dbNotes.splice(note - 1, req.body);
       res.json(true);
   });
   
+
   // Temporary Code to cleaer out the table while testing
   // ---------------------------------------------------------------------------
   app.post("/api/clear", function(req, res) {
