@@ -28,10 +28,4 @@ module.exports = function(app) {
   app.get("/assets/js/index", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/assets/js/index.js"));
   });
-
-//   If no matching route is found default to home
-  app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-    console.log("No Route Found: Returned Home Page");
-  });
 };
