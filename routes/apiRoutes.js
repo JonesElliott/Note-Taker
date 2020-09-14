@@ -46,6 +46,7 @@ module.exports = function(app) {
       console.log("This is note: " + note);
 
       dbNotes.splice((note - 1), 1);
+      generateID(dbNotes);
       writeMyFile('./db/db.json', dbNotes);
       res.json(true);
   });
