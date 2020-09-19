@@ -14,13 +14,11 @@ module.exports = function(app) {
 
   // Route to home page
   app.get("/", function(req, res) {
-    console.log("Home Page Requested");
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   // Route to notes page
   app.get("/notes", function(req, res) {
-    console.log("Notes Page Requested");
     res.sendFile(path.join(__dirname, "../public/notes.html"));
   });
 
