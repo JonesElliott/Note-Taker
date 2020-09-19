@@ -30,7 +30,7 @@ require("./routes/htmlRoutes")(app);
 
 // =============================================================================
 // LISTENER
-// The below code effectively "starts" our server
+// The below code effectively "starts" the server
 // =============================================================================
 
 app.listen(PORT, function() {
