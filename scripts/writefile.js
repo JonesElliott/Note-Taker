@@ -10,7 +10,6 @@ function writeMyFile(filePath, file) {
         if (error) {
             throw error;
         }
-        console.log(`File written successfully`);
     })
 }
 
