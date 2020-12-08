@@ -1,6 +1,6 @@
 # Note Taker
 
-[Deployed Site](https://tranquil-atoll-93014.herokuapp.com/)
+[Deployed Site](https://mynotewriter.herokuapp.com/)
 
 ![issue tracker badge](https://img.shields.io/github/issues/JonesElliott/Note-Taker?style=plastic) ![MIT license badge](https://img.shields.io/badge/License-MIT-green)
 
